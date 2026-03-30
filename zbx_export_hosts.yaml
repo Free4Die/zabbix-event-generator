@@ -1,0 +1,14 @@
+zabbix_export:
+  version: '6.0'
+  date: '2026-03-30T05:36:23Z'
+  groups:
+    - uuid: d8070997a05546d999fea44e6927e37f
+      name: all
+  hosts:
+    - host: My_Virtual_Host
+      name: My_Virtual_Host
+      templates:
+        - name: 'Simple event generator'
+      groups:
+        - name: all
+      inventory_mode: DISABLED

@@ -1,0 +1,84 @@
+zabbix_export:
+  version: '6.0'
+  date: '2026-03-30T05:36:42Z'
+  groups:
+    - uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    - uuid: a66faf37987245cf9754554959d1deff
+      template: 'Simple event generator'
+      name: 'Simple event generator'
+      description: 'Тестирование дашбордов и прочего'
+      groups:
+        - name: Templates
+      items:
+        - uuid: 825562387cd84526a1915d9cfd84b1a8
+          name: 'Критическая ошибка приложения'
+          type: TRAP
+          key: app.error.critical
+          delay: '0'
+          triggers:
+            - uuid: cb40b014e7d94a08a3d8a945f0fdbb37
+              expression: 'last(/Simple event generator/app.error.critical)<>1'
+              name: 'Ошибка приложения'
+              priority: DISASTER
+        - uuid: fe77890031ae4eb287278479f3e5978a
+          name: 'Превышено колличество неудачных авторизаций'
+          type: TRAP
+          key: auth.failed.attempts
+          delay: '0'
+          triggers:
+            - uuid: 527d873275654f4ea61e552f41cc2ec8
+              expression: 'last(/Simple event generator/auth.failed.attempts)<>1'
+              name: 'Превышено колличество неудачных авторизаций'
+              priority: DISASTER
+        - uuid: bfde348383e24850ae73e82b8ad971de
+          name: 'Тайм-аут подключения к БД'
+          type: TRAP
+          key: db.connection.timeout
+          delay: '0'
+          triggers:
+            - uuid: f1605fa045d8486fb4132c140460dc25
+              expression: 'last(/Simple event generator/db.connection.timeout)<>1'
+              name: 'База данных недоступна'
+              priority: DISASTER
+        - uuid: 29204edf40944810b24e7a11f9855159
+          name: 'Нехватка места на разделе /var/log'
+          type: TRAP
+          key: disk.space.warning
+          delay: '0'
+          triggers:
+            - uuid: 624d6c5d9fc1437caa7f805143442ffc
+              expression: 'last(/Simple event generator/disk.space.warning)<>1'
+              name: 'Закончилось место на диске'
+              priority: DISASTER
+        - uuid: 1b1494ac477c4259bc22b345114e8d65
+          name: 'Процент используемой оперативной памяти'
+          type: TRAP
+          key: mem.usage.percent
+          delay: '0'
+          triggers:
+            - uuid: 6cad996955594be4a39d4caf90f0b416
+              expression: 'last(/Simple event generator/mem.usage.percent)<>1'
+              name: 'Процент используемой оперативной памяти'
+              priority: DISASTER
+        - uuid: 59eb3c0d937e47b4b6bfdb7f7efbdbe0
+          name: 'Статус службы Nginx'
+          type: TRAP
+          key: service.status.nginx
+          delay: '0'
+          triggers:
+            - uuid: cb6f67cf29304494892a460bdfefc3ab
+              expression: 'last(/Simple event generator/service.status.nginx)<>1'
+              name: 'Служба не запущена'
+              priority: DISASTER
+        - uuid: bc46f9e681f44bee8add02c7216bbcc4
+          name: 'Колличество запросов на сайт'
+          type: TRAP
+          key: web.requests.count
+          delay: '0'
+          triggers:
+            - uuid: 7f1241634bd74d5bae47fe5abd2cc2db
+              expression: 'last(/Simple event generator/web.requests.count)<>1'
+              name: 'Колличество запросов на сайт'
+              priority: DISASTER
